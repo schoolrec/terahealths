@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat with Assistant</title>
+    <link rel="stylesheet" href="styles.css">
+   <style>
+        /* Global Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f8ff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        h1 {
+            color: #007BFF;
+            margin-bottom: 30px;
+        }
+
+        /* Chat container styling */
+        .chat-container {
+            width: 400px;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        /* Chatbox input styling */
+        #chat-box {
+            width: 100%;
+            height: 120px;
+            padding: 15px;
+            font-size: 16px;
+            border: 1px solid #007BFF;
+            border-radius: 10px;
+            box-sizing: border-box;
+            background-color: #f9f9f9;
+            resize: none;
+            transition: all 0.3s ease;
+        }
+
+        #chat-box:focus {
+            outline: none;
+            border-color: #0056b3;
+            box-shadow: 0 0 5px rgba(0, 0, 255, 0.2);
+        }
+
+        /* Send button styling */
+        button {
+            width: 100%;
+            padding: 12px;
+            font-size: 18px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Response box styling */
+        #response-box {
+            width: 100%;
+            padding: 15px;
+            border-radius: 10px;
+            background-color: #e9f4ff;
+            box-shadow: 0 5px 15px rgba(0, 123, 255, 0.1);
+            color: #333;
+            font-size: 16px;
+            word-wrap: break-word;
+            min-height: 100px;
+            text-align: left;
+        }
+
+        /* Animation for response box */
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Chat with Assistant</h1>
+    
+    <!-- Chat container -->
+    <div class="chat-container">
+        <!-- Text box for user input -->
+        <textarea id="chat-box" placeholder="Type something..." rows="4"></textarea>
+        
+        <!-- Send button -->
+        <button id="send-button">Send</button>
+        
+        <!-- Box to display chatbot response -->
+        <div id="response-box"></div>
+    </div>
+
+    <script>
+        // Event listener for sending the message
+        document.getElementById("send-button").addEventListener("click", function() {
+            var userInput = document.getElementById("chat-box").value.trim();
+            if (!userInput) {
+                alert("Please enter text.");
+                return;
+            }
+
+            // Display loading message
+            document.getElementById("response-box").innerHTML = "Thinking...";
+            document.getElementById("response-box").classList.add("fade-in");
+
+            // API request
+            var apiUrl = "https://api.x.ai/v1/chat/completions";
+            var headers = {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer xai-b3HVXGLCfK9w5O0D4celoP8T0lYbDs0IuG6QfrQ7soT960HjV9A5IdjofvsrJvZjOdgwgMUBZ1G53GcR "
+            };
+
+            var body = JSON.stringify({
+                "messages": [
+                    {
+                        "role": "system",
+                        "content": "You are a friendly assistant."
+                    },
+                    {
+                        "role": "user",
+                        "content": userInput
+                    }
+                ],
+                "model": "grok-beta",
+                "stream": false,
+                "temperature": 0.7
+            });
+
+            // Make the request to the API
+            fetch(apiUrl, {
+                method: "POST",
+                headers: headers,
+                body: body
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Extract response
+                var assistantResponse = data.choices && data.choices[0].message.content;
+                
+                // Display the response in the response box
+                document.getElementById("response-box").innerHTML = assistantResponse || "Sorry, I didn't get that.";
+                document.getElementById("response-box").classList.add("fade-in");
+            })
+            .catch(error => {
+                document.getElementById("response-box").innerHTML = "An error occurred. Please try again.";
+                console.error("Error:", error);
+            });
+        });
+    </script>
+</body>
+</html>
