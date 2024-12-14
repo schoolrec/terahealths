@@ -1,0 +1,96 @@
+/* Global Styles */
+body {
+    font-family: 'Times New Roman', Times, serif, sans-serif;
+    background-color: #658060;
+    color: #ced6de;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Chat Container */
+.chat-container {
+    width: 400px;
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Text Area */
+#chat-box {
+    width: 100%;
+    height: 120px;
+    padding: 15px;
+    font-size: 16px;
+    border: 1px solid #007BFF;
+    border-radius: 10px;
+    box-sizing: border-box;
+    background-color: #f9f9f9;
+    resize: none;
+    transition: all 0.3s ease;
+}
+
+#chat-box:focus {
+    outline: none;
+    border-color: #0056b3;
+    box-shadow: 0 0 5px rgba(0, 0, 255, 0.2);
+}
+
+/* File Input */
+#image-input {
+    width: 100%;
+    font-size: 14px;
+    padding: 8px;
+    border: 1px solid #007BFF;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+}
+
+/* Image Preview */
+#image-preview {
+    max-width: 100%;
+    max-height: 200px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    object-fit: contain;
+    margin-top: 10px;
+}
+
+/* Button */
+button {
+    width: 100%;
+    padding: 12px;
+    font-size: 18px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Response Box */
+#response-box {
+    width: 100%;
+    padding: 15px;
+    border-radius: 10px;
+    background-color: #e9f4ff;
+    color: #333;
+    font-size: 16px;
+    word-wrap: break-word;
+    min-height: 100px;
+    text-align: left;
+    box-shadow: 0 5px 15px rgba(0, 123, 255, 0.1);
+}
