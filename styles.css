@@ -1,96 +1,74 @@
 /* Global Styles */
 body {
-    font-family: 'Times New Roman', Times, serif, sans-serif;
-    background-color: #658060;
-    color: #ced6de;
+    font-family: 'Arial', sans-serif;
+    background-color: #007BFF; /* Blue theme */
+    color: #ffffff;
+    margin: 0;
+    padding: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    height: 100vh;
-    margin: 0;
 }
 
-/* Chat Container */
-.chat-container {
-    width: 400px;
+/* Top Bar */
+.top-bar {
+    width: 100%;
+    background-color: #0056b3; /* Darker blue for contrast */
+    color: white;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.top-bar h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.top-bar p {
+    font-size: 16px;
+    margin-top: 5px;
+}
+
+/* Centered Box */
+.center-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
     background-color: #ffffff;
     padding: 30px;
     border-radius: 15px;
-    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
 }
 
-/* Text Area */
-#chat-box {
-    width: 100%;
-    height: 120px;
-    padding: 15px;
-    font-size: 16px;
-    border: 1px solid #007BFF;
-    border-radius: 10px;
-    box-sizing: border-box;
-    background-color: #f9f9f9;
-    resize: none;
-    transition: all 0.3s ease;
-}
-
-#chat-box:focus {
-    outline: none;
-    border-color: #0056b3;
-    box-shadow: 0 0 5px rgba(0, 0, 255, 0.2);
-}
-
-/* File Input */
-#image-input {
-    width: 100%;
-    font-size: 14px;
-    padding: 8px;
-    border: 1px solid #007BFF;
-    border-radius: 10px;
-    background-color: #f9f9f9;
-}
-
-/* Image Preview */
-#image-preview {
-    max-width: 100%;
-    max-height: 200px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    object-fit: contain;
-    margin-top: 10px;
-}
-
-/* Button */
-button {
-    width: 100%;
-    padding: 12px;
+/* Buttons */
+.center-button {
+    display: inline-block;
+    padding: 15px 30px;
     font-size: 18px;
-    background-color: #007BFF;
-    color: white;
+    font-weight: bold;
+    color: #ffffff;
+    background-color: #007BFF; /* Blue background */
     border: none;
     border-radius: 10px;
+    text-align: center;
+    text-decoration: none;
+    margin: 10px 0;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
-button:hover {
-    background-color: #0056b3;
+.center-button:hover {
+    background-color: #0056b3; /* Darker blue when hovered */
 }
 
-/* Response Box */
-#response-box {
-    width: 100%;
-    padding: 15px;
-    border-radius: 10px;
-    background-color: #e9f4ff;
-    color: #333;
-    font-size: 16px;
-    word-wrap: break-word;
-    min-height: 100px;
-    text-align: left;
-    box-shadow: 0 5px 15px rgba(0, 123, 255, 0.1);
+.test-button {
+    background-color: #28a745; /* Green for the Test Page button */
+}
+
+.test-button:hover {
+    background-color: #218838; /* Darker green when hovered */
 }
