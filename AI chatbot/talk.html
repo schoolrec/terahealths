@@ -3,102 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chat with Assistant</title>
+    <title>AI Chatbot</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Chat with Assistant</h1>
-    <div class="chat-container">
-        <!-- Text input for user messages -->
-        <textarea id="chat-box" placeholder="Type your message..." rows="4"></textarea>
-        
-        <!-- File input for image uploads -->
-        <input type="file" id="image-input" accept="image/*">
-        
-        <!-- Image preview section -->
-        <img id="image-preview" alt="Image Preview" style="display: none;">
-        
-        <!-- Send button -->
-        <button id="send-button">Send</button>
-        
-        <!-- Response display -->
-        <div id="response-box"></div>
+
+    <!-- Top Bar with Info -->
+    <div class="top-bar">
+        <div class="top-bar-content">
+            <h1>Welcome to Our AI Chatbot</h1>
+            <p>Click below to interact with the AI Assistant!</p>
+        </div>
     </div>
 
-    <script>
-        // Handle image preview
-        document.getElementById("image-input").addEventListener("change", function () {
-            const file = this.files[0];
-            const preview = document.getElementById("image-preview");
+    <!-- Centered Box with Buttons -->
+    <div class="center-box">
+        <a href="https://terahealths.vercel.app/AI%20chatbot/talk.html" class="center-button">
+            Go to AI Chatbot
+        </a>
+        <a href="https://terahealths.vercel.app/TEST.html" class="center-button test-button">
+            Go to Test Page
+        </a>
+    </div>
 
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function (e) {
-                    preview.src = e.target.result;
-                    preview.style.display = "block";
-                };
-                reader.readAsDataURL(file);
-            } else {
-                preview.style.display = "none";
-            }
-        });
-
-        // Handle message submission
-        document.getElementById("send-button").addEventListener("click", function () {
-            const userInput = document.getElementById("chat-box").value.trim();
-            const imageFile = document.getElementById("image-input").files[0];
-
-            if (!userInput && !imageFile) {
-                alert("Please enter text or upload an image.");
-                return;
-            }
-
-            document.getElementById("response-box").innerHTML = "Thinking...";
-
-            const apiUrl = "https://api.x.ai/v1/chat/completions";
-            const headers = {
-                "Content-Type": "application/json",
-                "Authorization": "Bearer YOUR_API_KEY"
-            };
-
-            const body = {
-                messages: [
-                    { role: "system", content: "You are a friendly assistant." },
-                    { role: "user", content: userInput }
-                ],
-                model: "grok-2",
-                stream: false,
-                temperature: 0.7
-            };
-
-            if (imageFile) {
-                const reader = new FileReader();
-                reader.onload = function () {
-                    body.image = reader.result; // Assuming API supports base64 image data
-                    sendRequest(apiUrl, headers, body);
-                };
-                reader.readAsDataURL(imageFile);
-            } else {
-                sendRequest(apiUrl, headers, body);
-            }
-        });
-
-        function sendRequest(url, headers, body) {
-            fetch(url, {
-                method: "POST",
-                headers: headers,
-                body: JSON.stringify(body)
-            })
-                .then(response => response.json())
-                .then(data => {
-                    const assistantResponse = data.choices?.[0]?.message?.content || "Sorry, I didn't get that.";
-                    document.getElementById("response-box").innerHTML = assistantResponse;
-                })
-                .catch(error => {
-                    document.getElementById("response-box").innerHTML = "An error occurred. Please try again.";
-                    console.error("Error:", error);
-                });
-        }
-    </script>
 </body>
 </html>
